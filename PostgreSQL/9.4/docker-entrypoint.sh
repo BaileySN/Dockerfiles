@@ -15,7 +15,7 @@ if [ "$1" = 'postgres' ]; then
 
 	# look specifically for PG_VERSION, as it is expected in the DB dir
 	if [ ! -s "$PGDATA/PG_VERSION" ]; then
-		gosu postgres initdb
+		eval "gosu postgres initdb $POSTGRES_INITDB_ARGS"
 
 		# check password first so we can output the warning before postgres
 		# messes it up
@@ -44,9 +44,9 @@ if [ "$1" = 'postgres' ]; then
 		{ echo; echo "host all all 0.0.0.0/0 $authMethod"; } >> "$PGDATA/pg_hba.conf"
 
 		# internal start of server in order to allow set-up using psql-client		
-		# does not listen on TCP/IP and waits until start finishes
+		# does not listen on external TCP/IP and waits until start finishes
 		gosu postgres pg_ctl -D "$PGDATA" \
-			-o "-c listen_addresses=''" \
+			-o "-c listen_addresses='localhost'" \
 			-w start
 
 		: ${POSTGRES_USER:=postgres}
