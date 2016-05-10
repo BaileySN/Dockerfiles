@@ -1,4 +1,4 @@
-FROM     debian:jessie
+FROM     debian:sid
 
 RUN dpkg --add-architecture i386 && \
     apt-get -q update && \
