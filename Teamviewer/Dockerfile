@@ -1,4 +1,4 @@
-FROM     debian:sid
+FROM     ubuntu:14.04
 
 RUN dpkg --add-architecture i386 && \
     apt-get -q update && \
@@ -9,19 +9,21 @@ RUN dpkg --add-architecture i386 && \
         wget zlib1g:i386 libjpeg8:i386 libexpat1:i386 fonts-liberation:i386 \
         libfontconfig1:i386 fontconfig-config:i386 ucf \
         libdbus-1-3:i386 libjpeg62:i386 libxinerama1:i386 libnet-ifconfig-wrapper-perl\
-        libpng12-0:i386 procps && \
-    echo "noodle	ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/noodle
+        libpng12-0:i386 procps htop nano
+
 
 RUN wget http://download.teamviewer.com/download/teamviewer_i386.deb -O /tmp/teamviewer_linux.deb && \
     dpkg -i /tmp/teamviewer_linux.deb
 
-RUN sudo apt-get install -f
+RUN apt-get install -f -y
 
-RUN adduser --disabled-password --gecos noodle noodle
+RUN adduser --disabled-password --gecos noodle noodle && \
+    echo "noodle	ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/noodle
+
 
 USER noodle
 ENV USER noodle
 ENV DISPLAY :0.0
 
 # Launch
-CMD sudo service teamviewerd start && teamviewer
+CMD sudo /etc/init.d/teamviewerd start && teamviewer
