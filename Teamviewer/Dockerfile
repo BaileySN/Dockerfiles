@@ -15,6 +15,8 @@ RUN dpkg --add-architecture i386 && \
 RUN wget http://download.teamviewer.com/download/teamviewer_i386.deb -O /tmp/teamviewer_linux.deb && \
     dpkg -i /tmp/teamviewer_linux.deb
 
+RUN sudo apt-get install -f
+
 RUN adduser --disabled-password --gecos noodle noodle
 
 USER noodle
