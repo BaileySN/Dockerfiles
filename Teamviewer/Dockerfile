@@ -9,21 +9,23 @@ RUN dpkg --add-architecture i386 && \
         wget zlib1g:i386 libjpeg8:i386 libexpat1:i386 fonts-liberation:i386 \
         libfontconfig1:i386 fontconfig-config:i386 ucf \
         libdbus-1-3:i386 libjpeg62:i386 libxinerama1:i386 libnet-ifconfig-wrapper-perl\
-        libpng12-0:i386 procps htop nano
-
+        libpng12-0:i386 procps
 
 RUN wget http://download.teamviewer.com/download/teamviewer_i386.deb -O /tmp/teamviewer_linux.deb && \
     dpkg -i /tmp/teamviewer_linux.deb
 
 RUN apt-get install -f -y
 
-RUN adduser --disabled-password --gecos noodle noodle && \
-    echo "noodle	ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/noodle
-
+RUN export uid=1000 gid=1000 && \
+    groupadd -f --gid ${gid} noodle && \
+    adduser --disabled-password --uid ${uid} --gid ${gid} --shell /bin/bash --home /home/noodle --gecos noodle noodle && \
+    echo "noodle ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/noodle && \
+    chmod 0440 /etc/sudoers.d/noodle
 
 USER noodle
-ENV USER noodle
+ENV HOME /home/noodle
 ENV DISPLAY :0.0
 
 # Launch
-CMD sudo /etc/init.d/teamviewerd start && teamviewer
+CMD sudo /etc/init.d/teamviewerd start && \
+    teamviewer
