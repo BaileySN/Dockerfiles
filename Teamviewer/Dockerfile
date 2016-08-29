@@ -18,13 +18,13 @@ RUN export uid=1000 gid=1000 && \
     echo "noodle ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/noodle && \
     chmod 0440 /etc/sudoers.d/noodle
 
-#USER noodle
-#ENV HOME /home/noodle
-#ENV USER noodle
-#ENV DISPLAY :0.0
+USER noodle
+ENV HOME /home/noodle
+ENV USER noodle
+ENV DISPLAY :0.0
 
 VOLUME ["/tmp/.X11-unix"]
 
 # Launch
-#CMD sudo /etc/init.d/teamviewerd start && teamviewer
-CMD sudo teamviewer --daemon start
+CMD sudo service teamviewerd start && teamviewer
+
