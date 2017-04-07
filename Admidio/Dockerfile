@@ -1,9 +1,6 @@
-############################################
-# Dockerfile to build Nginx Server with PHP
-# Based on Debian Jessie Image
-############################################
 FROM debian:jessie
 MAINTAINER Guenter Bailey
+
 # install required packages
 RUN apt-get update
 RUN apt-get install -y apache2 libapache2-mod-php5 php5 php5-fpm php-pear php5-common php5-mcrypt php5-mysql php5-cli php5-gd zip unzip tar \
