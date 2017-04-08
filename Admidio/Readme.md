@@ -31,4 +31,18 @@ Darum habe ich mir gedacht, warum nicht das in einem [Docker Container](https://
 Den Fertigen Container kann man einfach per [docker pull guenterbailey/admidio:latest](https://hub.docker.com/r/guenterbailey/admidio/) downloaden.
 
 
+## Container erstellen
+
+Um den Container selber Lokal zu erstellen, das Repositority downloaden oder Clonen.
+
+Danach in den Ordner gehen und entweder direkt mit 
+```bash
+docker build -t admidio_test .
+```
+oder mit dem Skript den Container erstellen.
+```bash
+sh docker_build.sh
+```
+
+### Info zum Inhalt
 
