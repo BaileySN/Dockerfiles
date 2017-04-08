@@ -13,7 +13,7 @@ und nach diesen gesucht werden. [(c) Admidio.org 2017](https://www.admidio.org/d
 
 Kurz gesagt, es ist ein Wahnsinns Online Tool für Vereine aller größen.
 
-## Warum nicht ein Webhoster
+## Warum Docker
 
 Da ich selber mehrere Server mit Docker verbunden habe, wollte ich jetzt für unseren Verein nicht wieder einen extra Webserver 
 einrichten.
@@ -24,5 +24,11 @@ Webhoster mit ca. 50GB Webspace eher schwer zu finden.
 Und es gibt auch immer mehr Cloud Anbieter die mit Container Technik arbeiten z.b.: [Google Container Engine GCE](https://cloud.google.com/container-engine/), 
 [Amazon EC2 Container Service](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html),... 
 
-## Docker Container erstellen
+Darum habe ich mir gedacht, warum nicht das in einem [Docker Container](https://hub.docker.com) einbauen.
+
+## Container über Dockerhub Downloaden
+
+Den Fertigen Container kann man einfach per [docker pull guenterbailey/admidio:latest](https://hub.docker.com/r/guenterbailey/admidio/) downloaden.
+
+
 
