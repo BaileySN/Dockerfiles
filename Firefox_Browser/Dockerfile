@@ -1,6 +1,9 @@
 FROM debian:jessie
 
-RUN apt-get update && apt-get install -y firefox-esr sudo
+# added contrib and non-free
+RUN printf 'deb http://deb.debian.org/debian jessie main contrib non-free \ndeb http://deb.debian.org/debian jessie-updates main contrib non-free \ndeb http://security.debian.org jessie/updates main contrib non-free' >/etc/apt/sources.list
+
+RUN apt-get update && apt-get install -y firefox-esr sudo flashplugin-nonfree
 
 # Replace 1000 with your user / group id
 RUN export uid=1000 gid=1000 && \
