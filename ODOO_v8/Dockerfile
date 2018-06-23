@@ -36,6 +36,7 @@ RUN set -x; \
 COPY ./entrypoint.sh /
 COPY ./openerp-server.conf /etc/odoo/
 RUN chown odoo /etc/odoo/openerp-server.conf
+RUN chown -R odoo /usr/lib/python2.7/dist-packages/openerp/addons
 
 # Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN mkdir -p /mnt/extra-addons \
